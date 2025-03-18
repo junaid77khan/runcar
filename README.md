@@ -1,12 +1,86 @@
-# React + Vite
+# RunCar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="start">
+  <img src="https://runcar.in/logo.jpg" alt="RunCar Logo" width="200"/>
+</p>
 
-Currently, two official plugins are available:
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Demo](#demo)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Introduction
 
-## Expanding the ESLint configuration
+RunCar is a comprehensive car rental platform built with Next.js and powered by MongoDB. The application allows users to browse, filter, and rent cars for specific date ranges. With an intuitive user interface and secure payment processing, RunCar simplifies the car rental experience from start to finish.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- **User Authentication**: Secure login and registration using NextAuth
+- **Car Catalog**: Browse a diverse collection of rental vehicles
+- **Advanced Filtering**: Search cars by make, model, type, and price range
+- **Date-Based Availability**: Check car availability for specific date ranges
+- **Booking System**: Easy-to-use booking process with date validation
+- **Admin Dashboard**: Manage cars, bookings, and user information
+- **Responsive Design**: Fully responsive interface for all devices
+- **Secure Payments**: Process payments securely through Stripe integration
+- **Real-time Updates**: Get instant confirmation of bookings
+
+## Tech Stack
+
+- **Frontend**: Next.js, React.js, TailwindCSS
+- **Backend**: Next.js API Routes
+- **Database**: MongoDB with Mongoose
+- **Authentication**: NextAuth.js
+- **Payment Processing**: Stripe
+- **Deployment**: Vercel
+- **UI Components**: Headless UI, Heroicons
+- **Form Handling**: React Hook Form
+- **State Management**: React Context API
+
+## Demo
+
+Live Demo: https://runcar.in
+
+## Usage
+
+1. **Create an Account**: Register or log in to access all features
+2. **Browse Cars**: Explore the car catalog with advanced filtering options
+3. **Select Dates**: Choose pickup and return dates for your rental
+4. **Book a Car**: Complete the booking process with secure payment
+5. **Manage Bookings**: View and manage your active rentals
+
+## Screenshots
+
+![Home Page](![image](https://github.com/user-attachments/assets/57a50fcd-f2bb-4661-89ce-9be2925fc1e0))
+
+![Car Listing](![image](https://github.com/user-attachments/assets/3b830ef7-e0fa-401c-a5b8-69227cd0ed85))
+
+![Car Details](![image](https://github.com/user-attachments/assets/aea31e86-28d9-4941-a6bf-a0bc51b866fc))
+
+![Booking Process](![image](https://github.com/user-attachments/assets/22025dd6-19dc-44d1-af02-05b3790d0c6e))
+
+## Contributing
+
+Contributions are always welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Contact
+
+Junaid Khan - [@junaid77khan](https://github.com/junaid77khan)
+
+Project Link: [https://github.com/junaid77khan/runcar](https://github.com/junaid77khan/runcar)
