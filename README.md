@@ -87,3 +87,17 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Junaid Khan - [@junaid77khan](https://github.com/junaid77khan)
 
 Project Link: [https://github.com/junaid77khan/runcar](https://github.com/junaid77khan/runcar)
+
+Copyright Notice
+© 2025 Run Car. All Rights Reserved.
+IMPORTANT: This repository is publicly viewable for demonstration and educational purposes only.
+This project and its contents are protected by copyright law. No permission is granted for:
+
+Commercial use of any kind
+Creating derivative works
+Redistribution of any part of this code
+Use of this code in other projects
+
+Unauthorized use, reproduction, or distribution of this code is strictly prohibited and may result in legal action.
+This code is provided "as is" without warranty of any kind, express or implied. The author reserves all rights not expressly granted herein.
+By viewing or accessing this repository, you agree to abide by these terms and conditions.
