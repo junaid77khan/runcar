@@ -33,15 +33,10 @@ RunCar is a comprehensive car rental platform built with Next.js and powered by 
 
 ## Tech Stack
 
-- **Frontend**: Next.js, React.js, TailwindCSS
-- **Backend**: Next.js API Routes
-- **Database**: MongoDB with Mongoose
-- **Authentication**: NextAuth.js
-- **Payment Processing**: Stripe
-- **Deployment**: Vercel
-- **UI Components**: Headless UI, Heroicons
-- **Form Handling**: React Hook Form
-- **State Management**: React Context API
+- **Frontend**: React.js+Vite, TailwindCSS
+- **Backend**: PHP API Routes
+- **Database**: MySQL 
+- **Deployment**: Hostinger
 
 ## Demo
 
