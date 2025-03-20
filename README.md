@@ -17,7 +17,7 @@
 
 ## Introduction
 
-RunCar is a comprehensive car rental platform built with Next.js and powered by MongoDB. The application allows users to browse, filter, and rent cars for specific date ranges. With an intuitive user interface and secure payment processing, RunCar simplifies the car rental experience from start to finish.
+RunCar is a comprehensive car booking platform built with React.js and powered by MySQL. The application allows users to browse, filter, and rent cars for specific date ranges. With an intuitive user interface and secure payment processing, RunCar simplifies the car rental experience from start to finish.
 
 ## Features
 
