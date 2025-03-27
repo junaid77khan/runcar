@@ -1,18 +1,36 @@
+import { useEffect, useState } from "react";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
-import { FiSearch } from "react-icons/fi";
-import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
+import { Link } from "react-router-dom";
 import NavbarLinks from "./NavbarLinks";
 import MobileMenu from "./MobileMenu";
-import { Link, useNavigate } from "react-router-dom";
 import AccountMenu from "./AccountMenu";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    const expiry = localStorage.getItem("tokenExpiry");
+
+    if (!token || !expiry || Date.now() > Number(expiry) * 1000) {
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("tokenExpiry");
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  // Handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("tokenExpiry");
+    setIsLoggedIn(false);
+  };
+
   return (
     <header className="fixed top-0 w-full z-50">
       {/* Top Bar */}
@@ -28,9 +46,9 @@ const Header = () => {
             <FaMapMarkerAlt size={12} /> India
           </span>
         </div>
-        <button className="px-3 sm:px-4 py-1 border rounded text-black border-black text-xs sm:text-sm">
+        {/* <button className="px-3 sm:px-4 py-1 border rounded text-black border-black text-xs sm:text-sm">
           Driver Login
-        </button>
+        </button> */}
       </div>
 
       {/* Navigation Bar */}
@@ -53,9 +71,9 @@ const Header = () => {
           ))}
         </ul>
 
-        {/* Buttons */}
+        {/* Dropdown for Login/Signup & Logout */}
         <div className="hidden md:flex items-center gap-3">
-          <AccountMenu isLoggedIn={isLoggedIn} />
+          <AccountMenu isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
         </div>
 
         {/* Mobile Menu Button */}

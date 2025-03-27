@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-10 px-6 md:px-10 mt-10">
+    <footer className="bg-black text-white py-10 px-6 md:px-10">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
         
         {/* Left Section */}

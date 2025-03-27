@@ -6,12 +6,19 @@ import DatePicker from "react-datepicker";
 import BusBookingFlow from "../Components/BusBookingFlow ";
 import FilterSection from "../Components/FilterSection";
 import axios from "axios";
+import useBookingStore from "../store";
 
 const NavRoutes = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const initialState = useMemo(() => {
+  useEffect(() => {
+    if (!location.state?.initialPickup || !location.state?.initialDrop || !location.state?.initialDate) {
+      navigate("/"); 
+    }
+  }, [location, navigate]);
+
+  const initialState = useMemo(() => {    
     return {
       pickup: location.state?.initialPickup || "All",
       drop: location.state?.initialDrop || "All",
@@ -23,10 +30,9 @@ const NavRoutes = () => {
 
   const[loading, setLoading] = useState(false);
 
+  const { holdSeats, setHoldSeats, clearSeats } = useBookingStore();
   const [routes, setRoutes] = useState([]);
-  const [pickup, setPickup] = useState(initialState.pickup);
-  const [drop, setDrop] = useState(initialState.drop);
-  const [journeyDate, setJourneyDate] = useState(initialState.journeyDate);
+  const { fetchHoldSeats, pickup, setPickup, drop, setDrop, journeyDate, setJourneyDate } = useBookingStore();
   const [selectedRouteForSeat, setSelectedRouteForSeat] = useState(null);
   const [filteredRoutes, setFilteredRoutes] = useState([]);
   const [filters, setFilters] = useState({
@@ -197,17 +203,16 @@ const NavRoutes = () => {
 
   useEffect(() => {
     let filtered = routes;
-
-    if (pickup !== "All") {
-      filtered = filtered.filter((route) => route.startLocation === pickup);
+    if (pickup && pickup !== "All") {
+      filtered = filtered.filter((route) => route.source === pickup);
     }
-    if (drop !== "All") {
-      filtered = filtered.filter((route) => route.endLocation === drop);
+    if (drop && drop !== "All") {
+      filtered = filtered.filter((route) => route.destination === drop);
     }
-    if (journeyDate !== "Not Selected") {
+    if (journeyDate && journeyDate !== "Not Selected") {
       const [month, day, year] = journeyDate.split("/");
       const formattedJourneyDate = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-      filtered = filtered.filter((route) => formattedJourneyDate === route.date);
+      filtered = filtered.filter((route) => formattedJourneyDate === route.start_date);
     }
     
     if (filters.departureTime.length > 0) {
@@ -250,7 +255,11 @@ const NavRoutes = () => {
     
 
     setFilteredRoutes(filtered);
-  }, [pickup, drop, journeyDate, filters]);
+  }, [pickup, drop, journeyDate, filters, routes]);
+
+  useEffect(() => {
+    fetchHoldSeats();
+  }, [routes, pickup, drop, journeyDate]);
 
   const handleViewSeat = (route) => {
     setSelectedRouteForSeat(route);
@@ -260,7 +269,7 @@ const NavRoutes = () => {
     setSelectedRouteForSeat(null);
   }
   return (
-    <section className="mt-36 py-8 bg-gray-100">
+    <section className="mt-36 py-8 bg-gradient-to-br from-yellow-50 to-yellow-100">
       <div className="container mx-auto px-4 lg:px-6">
         
         <div className="bg-black text-white p-4 sm:p-6 rounded-lg shadow-lg relative">
@@ -396,8 +405,8 @@ const NavRoutes = () => {
 
             {filteredRoutes.length > 0 ? (
               filteredRoutes.map((item) => (
-                <>
-                <div  className="grid grid-cols-6 gap-4 items-center border-b p-4 text-sm hover:bg-gray-100">
+                <div key={item.r_id}>
+                <div key={item.r_id}  className="grid grid-cols-6 gap-4 items-center border-b p-4 text-sm hover:bg-gray-100">
                   
                   {/* Car & Features */}
                   <div className="font-semibold">{item.vehicle_name} <span className="bg-gray-200 text-black text-xs font-medium px-2.5 py-0.5 rounded-full">
@@ -443,7 +452,7 @@ const NavRoutes = () => {
                     </button>
                   </div>
                 </div>
-                {selectedRouteForSeat?.r_id === item.r_id && (
+                {selectedRouteForSeat?.r_id === item.r_id && holdSeats && (
                   <BusBookingFlow 
                     key={item.r_id}  
                     capacity={item.capacity} 
@@ -455,7 +464,7 @@ const NavRoutes = () => {
                   />
                 )}
 
-                </>
+                </div>
               ))
             ) : (
               <div className="p-4 text-center">
@@ -504,8 +513,11 @@ const NavRoutes = () => {
                     <BusBookingFlow 
                       key={item.r_id}  
                       capacity={item.capacity} 
+                      seatConfig = {JSON.parse(item.seat_config)}
                       boardingPoints={JSON.parse(item.boarding_points || "[]")} 
                       dropingPoints={JSON.parse(item.drop_points || "[]")} 
+                      route={item}
+                      journeyDate={journeyDate}
                     />
                   )}
                 </div>

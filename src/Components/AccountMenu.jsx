@@ -2,11 +2,32 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronDown, ChevronUp, User } from "lucide-react";
 
-const AccountMenu = ({ isLoggedIn, userName }) => {
+const AccountMenu = ({ handleLogout }) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const dropdownRef = useRef(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  // Check login status on component mount and periodically
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const user = localStorage.getItem("user");
+      if (user) {
+        setIsLoggedIn(true);
+        setUserName(JSON.parse(user).name || "User");
+      } else {
+        setIsLoggedIn(false);
+        setUserName("");
+      }
+    };
+
+    checkLoginStatus();
+    const interval = setInterval(checkLoginStatus, 5000); // Check every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -17,9 +38,7 @@ const AccountMenu = ({ isLoggedIn, userName }) => {
     };
 
     document.addEventListener("mousedown", handleOutsideClick);
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
   // Handle escape key press
@@ -31,9 +50,7 @@ const AccountMenu = ({ isLoggedIn, userName }) => {
     };
 
     document.addEventListener("keydown", handleEscKey);
-    return () => {
-      document.removeEventListener("keydown", handleEscKey);
-    };
+    return () => document.removeEventListener("keydown", handleEscKey);
   }, []);
 
   return (
@@ -53,19 +70,17 @@ const AccountMenu = ({ isLoggedIn, userName }) => {
           aria-haspopup="true"
         >
           <User size={16} />
-          <span>Account</span>
+          <span>{isLoggedIn ? userName : "Account"}</span>
           {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </button>
-        
+
         {isOpen && (
           <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-md py-1 z-50 border border-gray-100 transition-all duration-200 animate-fadeIn">
-            {/* Common Options */}
             <div className="px-3 py-2 text-xs font-semibold text-gray-500 border-b">
               BOOKING MANAGEMENT
             </div>
-            
-            <button 
-              className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 hover:cursor-pointer transition-colors duration-150"
+            <button
+              className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 transition-colors duration-150"
               onClick={() => {
                 navigate("/cancel-booking");
                 setIsOpen(false);
@@ -73,9 +88,8 @@ const AccountMenu = ({ isLoggedIn, userName }) => {
             >
               Cancel Booking
             </button>
-            
-            <button 
-              className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 hover:cursor-pointer transition-colors duration-150"
+            <button
+              className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 transition-colors duration-150"
               onClick={() => {
                 navigate("/modify-date");
                 setIsOpen(false);
@@ -83,9 +97,8 @@ const AccountMenu = ({ isLoggedIn, userName }) => {
             >
               Modify Travel Date
             </button>
-            
-            <button 
-              className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 hover:cursor-pointer transition-colors duration-150"
+            <button
+              className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 transition-colors duration-150"
               onClick={() => {
                 navigate("/view-ticket");
                 setIsOpen(false);
@@ -94,17 +107,13 @@ const AccountMenu = ({ isLoggedIn, userName }) => {
               View My Ticket
             </button>
 
-            {/* Logged-in Options */}
             {isLoggedIn ? (
               <>
                 <div className="px-3 py-2 text-xs font-semibold text-gray-500 border-b border-t">
                   MY ACCOUNT
                 </div>
-                <div className="px-4 py-2 text-sm text-gray-700 bg-gray-50">
-                  Welcome, {userName || "User"}
-                </div>
-                <button 
-                  className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 hover:cursor-pointer transition-colors duration-150"
+                <button
+                  className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 transition-colors duration-150"
                   onClick={() => {
                     navigate("/profile");
                     setIsOpen(false);
@@ -112,8 +121,8 @@ const AccountMenu = ({ isLoggedIn, userName }) => {
                 >
                   My Profile
                 </button>
-                <button 
-                  className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 hover:cursor-pointer transition-colors duration-150"
+                <button
+                  className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 transition-colors duration-150"
                   onClick={() => {
                     navigate("/bookings");
                     setIsOpen(false);
@@ -121,11 +130,12 @@ const AccountMenu = ({ isLoggedIn, userName }) => {
                 >
                   My Bookings
                 </button>
-                <button 
-                  className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 hover:cursor-pointer transition-colors duration-150 text-red-600"
+                <button
+                  className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 text-red-600 transition-colors duration-150"
                   onClick={() => {
-                    // Handle logout logic here
-                    navigate("/");
+                    handleLogout();
+                    localStorage.removeItem("user");
+                    setIsLoggedIn(false);
                     setIsOpen(false);
                   }}
                 >
@@ -137,12 +147,12 @@ const AccountMenu = ({ isLoggedIn, userName }) => {
                 <div className="px-3 py-2 text-xs font-semibold text-gray-500 border-b border-t">
                   AUTHENTICATION
                 </div>
-                <button 
+                <button
                   onClick={() => {
                     navigate("/login");
                     setIsOpen(false);
-                  }} 
-                  className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 hover:cursor-pointer transition-colors duration-150"
+                  }}
+                  className="flex w-full text-left px-4 py-2 text-sm hover:bg-gray-200 transition-colors duration-150"
                 >
                   Login/Signup
                 </button>
@@ -153,7 +163,7 @@ const AccountMenu = ({ isLoggedIn, userName }) => {
       </div>
 
       {/* Track Booking Button */}
-      <button 
+      <button
         onClick={() => navigate("/track")}
         className="bg-yellow-500 text-white font-semibold px-4 py-2 text-sm rounded-md hover:bg-yellow-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:ring-opacity-50 shadow-sm"
       >

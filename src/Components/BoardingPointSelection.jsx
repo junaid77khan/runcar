@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-const BoardingPointSelection = ({ boardingPoints=[], dropingPoints=[], onPointSelect }) => {
-    const [selectedBoarding, setSelectedBoarding] = useState(null);
-    const [selectedDropoff, setSelectedDropoff] = useState(null);
+const BoardingPointSelection = ({ boardingPoints=[], dropingPoints=[], onPointSelect, SelectedBoarding, SelectedDropoff }) => {
+    const [selectedBoarding, setSelectedBoarding] = useState(SelectedBoarding);
+    const [selectedDropoff, setSelectedDropoff] = useState(SelectedDropoff);
   
     return (
       <div className="boarding-selection space-y-4">
@@ -16,7 +16,7 @@ const BoardingPointSelection = ({ boardingPoints=[], dropingPoints=[], onPointSe
                 className={`
                   p-3 border rounded-lg cursor-pointer mb-2 
                   ${selectedBoarding === point
-                    ? 'bg-yellow-500 text-white' 
+                    ? 'bg-blue-500 text-white' 
                     : 'hover:bg-gray-100'}
                 `}
               >
@@ -44,7 +44,7 @@ const BoardingPointSelection = ({ boardingPoints=[], dropingPoints=[], onPointSe
                 className={`
                   p-3 border rounded-lg cursor-pointer mb-2
                   ${selectedDropoff === point 
-                    ? 'bg-yellow-500 text-white' 
+                    ? 'bg-blue-500 text-white' 
                     : 'hover:bg-gray-100'}
                 `}
               >

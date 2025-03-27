@@ -1,5 +1,6 @@
+import { LucideSettings2 } from 'lucide-react';
 import React, { useState } from 'react';
-import { FaFilter, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaFilter, FaChevronDown, FaChevronUp, FaMapMarkerAlt } from 'react-icons/fa';
 
 const FilterSection = ({ filters, handleCheckboxChange }) => {
   const [openFilter, setOpenFilter] = useState(null);
@@ -32,9 +33,12 @@ const FilterSection = ({ filters, handleCheckboxChange }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md sticky top-0">
+    <div className="  sticky top-0">
       {/* Mobile and Desktop Friendly Filters */}
-      <div className="flex flex-col">
+      <h2 className="text-2xl font-bold flex items-center gap-2 mb-6">
+        <LucideSettings2 className="text-yellow-500" /> Trip Preferences
+      </h2>
+      <div className="rounded-lg shadow-md bg-white flex flex-col">
         {filterSections.map((section) => (
           <div key={section.key} className="border-b last:border-b-0">
             {/* Filter Header - Works on both Mobile and Desktop */}
