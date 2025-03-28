@@ -7,48 +7,31 @@
 ## Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Demo](#demo)
-- [Usage](#usage)
 - [Screenshots](#screenshots)
+- [Technical Architecture](#technical-architecture)
+- [Advanced Booking Mechanism](#advanced-booking-mechanism)
+- [Key Technical Implementations](#key-technical-implementations)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
 
 ## Introduction
-
-RunCar is a comprehensive car booking platform built with React.js and powered by MySQL. The application allows users to browse, filter, and rent cars for specific date ranges. With an intuitive user interface and secure payment processing, RunCar simplifies the car rental experience from start to finish.
+RunCar is an advanced car rental platform designed to streamline the vehicle booking process through a robust, secure, and user-friendly web application. The platform addresses critical challenges in car rental by providing an intuitive interface, comprehensive vehicle selection, and a sophisticated booking system.
 
 ## Features
-
-- **User Authentication**: Secure login and registration using NextAuth
-- **Car Catalog**: Browse a diverse collection of rental vehicles
-- **Advanced Filtering**: Search cars by make, model, type, and price range
-- **Date-Based Availability**: Check car availability for specific date ranges
-- **Booking System**: Easy-to-use booking process with date validation
-- **Admin Dashboard**: Manage cars, bookings, and user information
-- **Responsive Design**: Fully responsive interface for all devices
-- **Secure Payments**: Process payments securely through Stripe integration
-- **Real-time Updates**: Get instant confirmation of bookings
-
-## Tech Stack
-
-- **Frontend**: React.js+Vite, TailwindCSS
-- **Backend**: PHP API Routes
-- **Database**: MySQL 
-- **Deployment**: Hostinger
-
-## Demo
-
-Live Demo: https://runcar.in
-
-## Usage
-
-1. **Create an Account**: Register or log in to access all features
-2. **Browse Cars**: Explore the car catalog with advanced filtering options
-3. **Select Dates**: Choose pickup and return dates for your rental
-4. **Book a Car**: Complete the booking process with secure payment
-5. **Manage Bookings**: View and manage your active rentals
+- **Comprehensive User Authentication**: Secure registration and login system
+- **Intelligent Car Catalog**: Advanced vehicle browsing with multi-dimensional filtering
+- **Dynamic Availability Management**: Real-time car availability tracking
+- **Sophisticated Booking Workflow**: 
+  - 10-minute pre-booking reservation mechanism
+  - Automatic seat/vehicle hold and release system
+  - Concurrent booking prevention
+- **Secure Payment Integration**: Seamless and protected transaction processing
+- **Responsive Admin Dashboard**: Complete booking and user management
+- **Responsive Design**: Fully adaptive across devices
 
 ## Screenshots
 
@@ -63,36 +46,79 @@ Live Demo: https://runcar.in
 
 ![image](https://github.com/user-attachments/assets/22025dd6-19dc-44d1-af02-05b3790d0c6e)
 
+## Technical Architecture
+- **Frontend Optimization**: React.js with Vite for high-performance rendering
+- **Responsive Design**: TailwindCSS for adaptive, mobile-friendly interfaces
+- **Backend Logic**: PHP API for robust server-side processing
+- **Database Management**: MySQL with advanced query optimization
+- **State Management**: Efficient client-side and server-side state synchronization
+
+## Advanced Booking Mechanism
+### Innovative Reservation Protection
+- **Pre-Booking Hold**: 10-minute reservation window
+- **Automatic Timeout Management**: 
+  - Unconfirmed bookings automatically invalidated
+  - Prevents concurrent booking conflicts
+- **Real-Time Seat Availability**: 
+  - Instant tracking of vehicle reservation status
+  - Immediate conflict resolution
+- **Transaction Integrity**: Ensures fair and secure booking process
+
+## Key Technical Implementations
+- **Authentication**: Implemented using secure NextAuth protocols
+- **Payment Processing**: Stripe integration with comprehensive error handling
+- **Performance Optimization**: 
+  - Efficient database queries
+  - Minimized API call overhead
+  - Responsive frontend interactions
+
+## Tech Stack
+- **Frontend**: React.js, Vite, TailwindCSS
+- **Backend**: PHP API
+- **Database**: MySQL
+- **Authentication**: NextAuth
+- **Payment**: Stripe
+- **Deployment**: Hostinger
+
+## Installation
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Configure environment variables
+4. Set up MySQL database
+5. Run development server: `npm run dev`
+
+## Usage
+1. Register/Login
+2. Browse car catalog
+3. Select rental dates
+4. Complete secure booking
+5. Manage reservations
+
 ## Contributing
-
-Contributions are always welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions welcome! Please follow standard GitHub collaboration workflows.
 
 ## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+MIT License. See `LICENSE` for details.
 
 ## Contact
+**Junaid Khan**
+- GitHub: [@junaid77khan](https://github.com/junaid77khan)
+- Project: [RunCar Repository](https://github.com/junaid77khan/runcar)
 
-Junaid Khan - [@junaid77khan](https://github.com/junaid77khan)
+## Copyright Notice
+© 2025 RunCar. All Rights Reserved.
 
-Project Link: [https://github.com/junaid77khan/runcar](https://github.com/junaid77khan/runcar)
-
-Copyright Notice
-© 2025 Run Car. All Rights Reserved.
+### Repository Access Terms
 IMPORTANT: This repository is publicly viewable for demonstration and educational purposes only.
-This project and its contents are protected by copyright law. No permission is granted for:
 
-Commercial use of any kind
-Creating derivative works
-Redistribution of any part of this code
-Use of this code in other projects
+This project and its contents are protected by copyright law. No permission is granted for:
+- Commercial use of any kind
+- Creating derivative works
+- Redistribution of any part of this code
+- Use of this code in other projects
 
 Unauthorized use, reproduction, or distribution of this code is strictly prohibited and may result in legal action.
+
 This code is provided "as is" without warranty of any kind, express or implied. The author reserves all rights not expressly granted herein.
+
 By viewing or accessing this repository, you agree to abide by these terms and conditions.
